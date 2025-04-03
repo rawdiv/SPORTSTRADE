@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SportsTrade - Tokenized Sports Trading Platform</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --primary-black: #000000;
+            --primary-yellow: #FFD700;
+            --dark-bg: #1A1A1A;
+            --light-text: #F5F5F5;
+        }
+
+        body {
+            background: linear-gradient(to bottom, var(--primary-black), var(--dark-bg));
+            color: var(--light-text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1) 0%, rgba(0,0,0,0) 100%);
+        }
+
+        .glass-effect {
+            background: rgba(26, 26, 26, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+
+        /* Orbit Lines */
+        .orbit-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            border-radius: 50%;
+            animation: orbit 20s linear infinite;
+        }
+
+        .orbit:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            margin: -150px 0 0 -150px;
+            animation-duration: 20s;
+        }
+
+        .orbit:nth-child(2) {
+            width: 500px;
+            height: 500px;
+            top: 50%;
+            left: 50%;
+            margin: -250px 0 0 -250px;
+            animation-duration: 30s;
+        }
+
+        .orbit:nth-child(3) {
+            width: 700px;
+            height: 700px;
+            top: 50%;
+            left: 50%;
+            margin: -350px 0 0 -350px;
+            animation-duration: 40s;
+        }
+
+        @keyframes orbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Scroll Animation */
+        .scroll-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+
+        .scroll-content {
+            display: inline-block;
+            animation: scroll 30s linear infinite;
+        }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Review Card */
+        .review-card {
+            background: rgba(26, 26, 26, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <!-- Orbit Lines -->
+    <div class="orbit-container">
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+        <div class="orbit"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-[#1A1A1A]/80 backdrop-blur-md border-b border-[#FFD700]/20 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-[#FFD700] text-2xl font-bold">SPORTS TRADE</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features" class="text-white hover:text-[#FFD700] transition">Features</a>
+                    <a href="#how-it-works" class="text-white hover:text-[#FFD700] transition">How It Works</a>
+                    <a href="#market" class="text-white hover:text-[#FFD700] transition">Market</a>
+                    <a href="#reviews" class="text-white hover:text-[#FFD700] transition">Reviews</a>
+                    <button class="bg-[#FFD700] text-black px-4 py-2 rounded-md font-semibold hover:bg-opacity-90 transition">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center pt-16" data-aos="fade-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8">
+                    <h1 class="text-5xl md:text-6xl font-bold">
+                        Trade <span class="text-[#FFD700]">Sports</span> Like Never Before
+                    </h1>
+                    <p class="text-xl text-gray-300">
+                        The world's first blockchain-powered platform for trading tokenized sports assets. Buy, sell, and trade your favorite players and teams in real-time.
+                    </p>
+                    <div class="flex space-x-4">
+                        <button class="bg-[#FFD700] text-black px-8 py-3 rounded-md font-semibold hover:bg-opacity-90 transition">
+                            Start Trading
+                        </button>
+                        <button class="border border-[#FFD700] text-[#FFD700] px-8 py-3 rounded-md font-semibold hover:bg-[#FFD700]/10 transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                <div class="relative">
+                    <div class="animate-float">
+                        <img src="https://placehold.co/600x400/1A1A1A/FFD700" alt="Trading Platform Preview" class="rounded-lg shadow-2xl">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20" data-aos="fade-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Why Choose SportsTrade?</h2>
+                <p class="text-xl text-gray-300">Experience the future of sports trading</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card glass-effect p-6 rounded-lg">
+                    <div class="text-[#FFD700] text-4xl mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Real-Time Trading</h3>
+                    <p class="text-gray-300">Trade sports assets instantly with blockchain-powered smart contracts.</p>
+                </div>
+                <div class="feature-card glass-effect p-6 rounded-lg">
+                    <div class="text-[#FFD700] text-4xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Secure & Transparent</h3>
+                    <p class="text-gray-300">All transactions are secured on the blockchain with complete transparency.</p>
+                </div>
+                <div class="feature-card glass-effect p-6 rounded-lg">
+                    <div class="text-[#FFD700] text-4xl mb-4">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Advanced Analytics</h3>
+                    <p class="text-gray-300">Make informed decisions with real-time market data and analytics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-[#1A1A1A]" data-aos="fade-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">How Athlete Trading Works</h2>
+                <p class="text-xl text-gray-300">Trade athlete tokens on the blockchain in three simple steps</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-effect p-6 rounded-lg text-center">
+                    <div class="bg-[#FFD700] text-black w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Connect Your Wallet</h3>
+                    <p class="text-gray-300">Link your Web3 wallet (MetaMask, WalletConnect) to access the platform</p>
+                    <div class="mt-4 flex justify-center space-x-4">
+                        <img src="https://placehold.co/40x40/1A1A1A/FFD700" alt="MetaMask" class="w-10 h-10 rounded-full">
+                        <img src="https://placehold.co/40x40/1A1A1A/FFD700" alt="WalletConnect" class="w-10 h-10 rounded-full">
+                    </div>
+                </div>
+                <div class="glass-effect p-6 rounded-lg text-center">
+                    <div class="bg-[#FFD700] text-black w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Choose Athletes</h3>
+                    <p class="text-gray-300">Browse and select from verified athlete tokens across different sports</p>
+                    <div class="mt-4">
+                        <span class="inline-block bg-[#FFD700]/10 text-[#FFD700] px-3 py-1 rounded-full text-sm">Verified Athletes</span>
+                    </div>
+                </div>
+                <div class="glass-effect p-6 rounded-lg text-center">
+                    <div class="bg-[#FFD700] text-black w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-exchange-alt"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Trade Securely</h3>
+                    <p class="text-gray-300">Execute trades with smart contracts for instant, secure settlements</p>
+                    <div class="mt-4">
+                        <span class="inline-block bg-[#FFD700]/10 text-[#FFD700] px-3 py-1 rounded-full text-sm">Smart Contracts</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Onboarding Section -->
+    <section id="onboarding" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">Start Trading Athletes Today</h2>
+                <p class="text-xl text-gray-300">Follow these steps to begin your athlete trading journey</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8" data-aos="fade-right">
+                    <div class="glass-effect p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-[#FFD700] text-black w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <span class="text-sm font-bold">1</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Create Your Account</h3>
+                                <p class="text-gray-300">Sign up with your email and complete KYC verification to ensure secure trading</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-[#FFD700] text-black w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <span class="text-sm font-bold">2</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Fund Your Wallet</h3>
+                                <p class="text-gray-300">Deposit cryptocurrency or fiat to start trading athlete tokens</p>
+                                <div class="mt-4 flex space-x-4">
+                                    <span class="inline-block bg-[#FFD700]/10 text-[#FFD700] px-3 py-1 rounded-full text-sm">ETH</span>
+                                    <span class="inline-block bg-[#FFD700]/10 text-[#FFD700] px-3 py-1 rounded-full text-sm">USDT</span>
+                                    <span class="inline-block bg-[#FFD700]/10 text-[#FFD700] px-3 py-1 rounded-full text-sm">USD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-[#FFD700] text-black w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <span class="text-sm font-bold">3</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Explore Athletes</h3>
+                                <p class="text-gray-300">Browse through verified athletes, view their performance metrics, and market trends</p>
+                                <div class="mt-4">
+                                    <span class="inline-block bg-[#FFD700]/10 text-[#FFD700] px-3 py-1 rounded-full text-sm">Performance Analytics</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="glass-effect p-6 rounded-lg">
+                        <div class="flex items-start">
+                            <div class="bg-[#FFD700] text-black w-8 h-8 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                <span class="text-sm font-bold">4</span>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-semibold mb-2">Start Trading</h3>
+                                <p class="text-gray-300">Place your first trade and join the future of athlete trading</p>
+                                <button class="mt-4 bg-[#FFD700] text-black px-6 py-2 rounded-md font-semibold hover:bg-opacity-90 transition">
+                                    Begin Trading
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative" data-aos="fade-left">
+                    <div class="animate-float">
+                        <img src="https://placehold.co/600x800/1A1A1A/FFD700" alt="Trading Platform Preview" class="rounded-lg shadow-2xl">
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-[#FFD700] text-black p-4 rounded-lg shadow-lg">
+                        <div class="flex items-center">
+                            <div class="w-12 h-12 rounded-full bg-black flex items-center justify-center mr-4">
+                                <i class="fas fa-chart-line text-[#FFD700]"></i>
+                            </div>
+                            <div>
+                                <p class="font-semibold">Live Market Data</p>
+                                <p class="text-sm">Real-time athlete token prices</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Preview Section -->
+    <section id="market" class="py-20 bg-[#1A1A1A]" data-aos="fade-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Live Athlete Market</h2>
+                <p class="text-xl text-gray-300">Track real-time athlete token prices and trading activity</p>
+            </div>
+            <div class="glass-effect rounded-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Top Athletes</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-[#1A1A1A] rounded-lg">
+                                <div class="flex items-center">
+                                    <img src="https://placehold.co/40x40/1A1A1A/FFD700" alt="Athlete" class="w-10 h-10 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-semibold">Lionel Messi</h4>
+                                        <p class="text-sm text-gray-400">Football</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold">$1,500</p>
+                                    <p class="text-green-500 text-sm">+5.2%</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-[#1A1A1A] rounded-lg">
+                                <div class="flex items-center">
+                                    <img src="https://placehold.co/40x40/1A1A1A/FFD700" alt="Athlete" class="w-10 h-10 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-semibold">LeBron James</h4>
+                                        <p class="text-sm text-gray-400">Basketball</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold">$1,200</p>
+                                    <p class="text-green-500 text-sm">+3.8%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-4">Recent Trades</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between p-4 bg-[#1A1A1A] rounded-lg">
+                                <div class="flex items-center">
+                                    <img src="https://placehold.co/40x40/1A1A1A/FFD700" alt="Athlete" class="w-10 h-10 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-semibold">Cristiano Ronaldo</h4>
+                                        <p class="text-sm text-gray-400">10:30 AM</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold">$1,450</p>
+                                    <p class="text-green-500 text-sm">Buy</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-[#1A1A1A] rounded-lg">
+                                <div class="flex items-center">
+                                    <img src="https://placehold.co/40x40/1A1A1A/FFD700" alt="Athlete" class="w-10 h-10 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-semibold">Serena Williams</h4>
+                                        <p class="text-sm text-gray-400">10:15 AM</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-semibold">$950</p>
+                                    <p class="text-red-500 text-sm">Sell</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-[#1A1A1A]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold mb-4">What Our Traders Say</h2>
+                <p class="text-xl text-gray-300">Join thousands of satisfied traders</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="review-card p-6 rounded-lg" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-[#FFD700] flex items-center justify-center mr-4">
+                            <span class="text-black font-bold">JD</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">John Doe</h4>
+                            <p class="text-sm text-gray-400">Professional Trader</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"The platform's real-time trading and analytics have transformed my trading strategy. Highly recommended!"</p>
+                    <div class="flex mt-4 text-[#FFD700]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-card p-6 rounded-lg" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-[#FFD700] flex items-center justify-center mr-4">
+                            <span class="text-black font-bold">AS</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Alice Smith</h4>
+                            <p class="text-sm text-gray-400">Sports Enthusiast</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"Finally, a platform that combines my love for sports with trading. The interface is intuitive and the features are amazing!"</p>
+                    <div class="flex mt-4 text-[#FFD700]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                <div class="review-card p-6 rounded-lg" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-[#FFD700] flex items-center justify-center mr-4">
+                            <span class="text-black font-bold">MJ</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Mike Johnson</h4>
+                            <p class="text-sm text-gray-400">Crypto Investor</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300">"The blockchain integration is seamless, and the security features give me peace of mind. Great platform!"</p>
+                    <div class="flex mt-4 text-[#FFD700]">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-[#1A1A1A]" data-aos="fade-up">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-4">Ready to Start Trading?</h2>
+            <p class="text-xl text-gray-300 mb-8">Join thousands of traders in the future of sports trading</p>
+            <button class="bg-[#FFD700] text-black px-8 py-3 rounded-md font-semibold hover:bg-opacity-90 transition">
+                Get Started Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-[#FFD700]/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-[#FFD700] text-xl font-bold mb-4">SPORTS TRADE</h3>
+                    <p class="text-gray-400">The future of sports trading is here.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Platform</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Market</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Analytics</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">API</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-[#FFD700] transition">Support</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-[#FFD700] transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#FFD700] transition"><i class="fab fa-discord"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-[#FFD700] transition"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-[#FFD700]/20 text-center text-gray-400">
+                <p>&copy; 2024 SportsTrade. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
